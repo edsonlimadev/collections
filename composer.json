@@ -10,7 +10,12 @@
   },
   "autoload": {
     "psr-4" : {
-      "Edsonlimadev\\Collections\\": ["src", "test"]
+      "Edsonlimadev\\Collections\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Edsonlimadev\\Collections\\": "test"
     }
   }
 }

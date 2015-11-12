@@ -25,7 +25,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function each(\Closure $block)
     {
-        foreach($this->elements as $element) {
+        foreach ($this->elements as $element) {
             $block($element);
         }
     }
@@ -35,7 +35,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function eachWithIndex(\Closure $block)
     {
-        foreach($this->elements as $index => $element) {
+        foreach ($this->elements as $index => $element) {
             $block($index, $element);
         }
     }

@@ -122,7 +122,7 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $iterator = $collection->getIterator();
         $values = [];
 
-        foreach($iterator as $element) {
+        foreach ($iterator as $element) {
             $values[] = $element;
         }
 

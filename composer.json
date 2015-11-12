@@ -1,0 +1,16 @@
+{
+  "name": "Edsonlimadev\\Collections",
+  "author": {
+    "name": "Edson Lima",
+    "email": "dddwebdeveloper@gmail.com"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.0",
+    "codeclimate/php-test-reporter": "^0.2.0"
+  },
+  "autoload": {
+    "psr-4" : {
+      "Edsonlimadev\\Collections\\": ["src", "test"]
+    }
+  }
+}

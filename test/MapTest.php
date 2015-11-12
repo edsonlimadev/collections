@@ -19,4 +19,22 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($expected->equals($collection->keys()));
     }
+
+    public function testValues()
+    {
+        $collection = new Map([
+            'Cart' => 'cart',
+            'Cart.items' => 'cart/items',
+            'Cart.customer' => 'cart/customer',
+            'Cart.zipcode' => 'cart/zipcode',
+        ]);
+        $expected = new Immutable([
+            'cart',
+            'cart/items',
+            'cart/customer',
+            'cart/zipcode'
+        ]);
+
+        $this->assertTrue($expected->equals($collection->values()));
+    }
 }

@@ -37,4 +37,56 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($expected->equals($collection->values()));
     }
+
+    public function testGetADefinedValue()
+    {
+        $collection = new Map([
+           'Chala head chala' => 'DBZ'
+        ]);
+
+        $this->assertEquals('DBZ', $collection->get('Chala head chala'));
+    }
+
+    public function testGetAnUndefinedValue()
+    {
+        $collection = new Map([
+            'Chala head chala' => 'DBZ'
+        ]);
+
+        $this->assertEquals(null, $collection->get('Inspector Gadget'));
+    }
+
+    public function testGetDefaultValue()
+    {
+        $collection = new Map([
+            'Chala head chala' => 'DBZ'
+        ]);
+
+        $this->assertEquals('None', $collection->get('Gotta catch\'em all', 'None'));
+        $this->assertEquals('DBZ', $collection->get('Chala head chala', 'None'));
+    }
+
+    public function testSetAValueToCollection()
+    {
+        $collection = new Map();
+
+        $collection->set('Shurato', 'Anime');
+
+        $this->assertEquals('Anime', $collection->get('Shurato'));
+    }
+
+    public function testSetMultipleValuesToCollection()
+    {
+        $collection = new Map();
+
+        $collection->set('Shurato', 'Anime');
+        $collection->set('Sandman', 'HQ');
+        $collection->set('DBZ', 'Anime');
+        $collection->set('Pokemon', 'Anime');
+
+        $this->assertEquals('Anime', $collection->get('Shurato'));
+        $this->assertEquals('HQ', $collection->get('Sandman'));
+        $this->assertEquals('Anime', $collection->get('DBZ'));
+        $this->assertEquals('Anime', $collection->get('Pokemon'));
+    }
 }

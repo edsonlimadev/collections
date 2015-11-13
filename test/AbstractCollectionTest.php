@@ -91,7 +91,7 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($filtered->equals(new Immutable([1 => 'a', 3 => 'b'])));
     }
 
-    public function testMap()
+    public function testMapWithoutIndex()
     {
         $collection = new Immutable([
             ['name' => 'Edson', 'age' => 25],

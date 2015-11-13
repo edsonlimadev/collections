@@ -105,6 +105,29 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(['Edson', 'Batman'], 'elements', $mapped);
     }
 
+    public function testMapWithIndex()
+    {
+        $collection = new Immutable([
+            ['name' => 'Robin', 'age' => 25],
+            ['name' => 'Jocker', 'age' => 26],
+            ['name' => 'Batman', 'age' => 25]
+        ]);
+
+        $mapped = $collection->map(function($element, $index) {
+            return ($index % 2 == 0) ? $element['name'] : $element['age'];
+        });
+
+        $this->assertAttributeEquals(
+            [
+                0 => 'Robin',
+                1 => 26,
+                2 => 'Batman'
+            ],
+            'elements',
+            $mapped
+        );
+    }
+
     public function testReduceWithoutInitialValue()
     {
         $collection = new Immutable(['Edson','Lima', 'Junior']);

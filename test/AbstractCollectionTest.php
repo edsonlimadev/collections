@@ -39,7 +39,7 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([42, new \stdClass()], $collection->toArray());
     }
 
-    public function testEach()
+    public function testEachWithoutIndex()
     {
         $sum = 0;
         $collection = new Immutable([1,2,3]);

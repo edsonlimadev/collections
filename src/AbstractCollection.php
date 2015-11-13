@@ -61,7 +61,15 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function filter(\Closure $filter)
     {
-        return new static(array_filter($this->elements, $filter));
+        $filtered = [];
+
+        foreach ($this->elements as $index => $element) {
+            if ($filter($element, $index)) {
+                $filtered[$index] = $element;
+            }
+        }
+
+        return new static($filtered);
     }
 
     /**

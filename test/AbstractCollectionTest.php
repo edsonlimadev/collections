@@ -67,7 +67,7 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         ], $mapped);
     }
 
-    public function testFilter()
+    public function testFilterWithoutIndex()
     {
         $collection = new Immutable([1,'a',3]);
 
@@ -77,6 +77,18 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(2, count($filtered));
         $this->assertEmpty(array_diff([1,3], array_values($filtered->toArray())));
+    }
+
+    public function testFilterWithIndex()
+    {
+        $collection = new Immutable([1,'a',3,'b','c']);
+
+        $filtered = $collection->filter(function($element, $index) {
+           return ($index % 2 == 1);
+        });
+
+        $this->assertEquals(2, count($filtered));
+        $this->assertTrue($filtered->equals(new Immutable([1 => 'a', 3 => 'b'])));
     }
 
     public function testMap()

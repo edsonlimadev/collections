@@ -134,4 +134,16 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($collectionA->equals($collectionB));
     }
+
+    public function testSort()
+    {
+        $collectionA = new Immutable([1,3,2]);
+        $expected = new Immutable([1,2,3]);
+
+        $sortedCollection = $collectionA->sort(function($a, $b) {
+            return $a > $b;
+        });
+
+        $this->assertTrue($sortedCollection->equals($expected));
+    }
 }

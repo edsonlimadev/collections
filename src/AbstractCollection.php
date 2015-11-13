@@ -108,4 +108,15 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
 
         return empty(array_diff_assoc($this->elements, $collection->toArray()));
     }
+
+    /**
+     * @param callable $sortManager
+     * @return static
+     */
+    public function sort(\Closure $sortManager)
+    {
+        $copy = array_merge($this->elements);
+        usort($copy, $sortManager);
+        return new static($copy);
+    }
 }

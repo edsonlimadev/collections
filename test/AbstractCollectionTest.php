@@ -4,6 +4,41 @@ namespace Edsonlimadev\Collections;
 
 class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
 {
+    public function testGetIterator()
+    {
+        $collection = new Immutable([1,3]);
+        $iterator = $collection->getIterator();
+        $values = [];
+
+        foreach ($iterator as $element) {
+            $values[] = $element;
+        }
+
+        $this->assertInstanceOf('\Iterator', $iterator);
+        $this->assertEquals([1,3], $values);
+    }
+
+    public function testCount()
+    {
+        $collection = new Immutable([1,3]);
+
+        $this->assertCount(2, $collection);
+    }
+
+    public function testContains()
+    {
+        $collection = new Immutable(range(40,42));
+
+        $this->assertTrue($collection->contains(42));
+    }
+
+    public function testToArray()
+    {
+        $collection = new Immutable([42, new \stdClass()]);
+
+        $this->assertEquals([42, new \stdClass()], $collection->toArray());
+    }
+
     public function testEach()
     {
         $sum = 0;
@@ -21,7 +56,7 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $mapped = [];
         $collection = new Immutable(['a','b','c']);
 
-        $collection->eachWithIndex(function($index, $element) use (&$mapped) {
+        $collection->each(function($element, $index) use (&$mapped) {
            $mapped[++$index] = $element;
         });
 
@@ -98,40 +133,5 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $collectionB = new Immutable([1 => 42, 'a' =>'top nos falsetes, viu!!!']);
 
         $this->assertFalse($collectionA->equals($collectionB));
-    }
-
-    public function testContains()
-    {
-        $collection = new Immutable(range(40,42));
-
-        $this->assertTrue($collection->contains(42));
-    }
-
-    public function testToArray()
-    {
-        $collection = new Immutable([42, new \stdClass()]);
-
-        $this->assertEquals([42, new \stdClass()], $collection->toArray());
-    }
-
-    public function testGetIterator()
-    {
-        $collection = new Immutable([1,3]);
-        $iterator = $collection->getIterator();
-        $values = [];
-
-        foreach ($iterator as $element) {
-            $values[] = $element;
-        }
-
-        $this->assertInstanceOf('\Iterator', $iterator);
-        $this->assertEquals([1,3], $values);
-    }
-
-    public function testCount()
-    {
-        $collection = new Immutable([1,3]);
-
-        $this->assertCount(2, $collection);
     }
 }

@@ -20,23 +20,38 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
         $this->elements = $elements;
     }
 
+
     /**
-     * @param callable $block
+     * @return array
      */
-    public function each(\Closure $block)
+    public function toArray()
     {
-        foreach ($this->elements as $element) {
-            $block($element);
-        }
+        return $this->elements;
+    }
+
+    /**
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->elements);
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->elements);
     }
 
     /**
      * @param callable $block
      */
-    public function eachWithIndex(\Closure $block)
+    public function each(\Closure $block)
     {
         foreach ($this->elements as $index => $element) {
-            $block($index, $element);
+            $block($element, $index);
         }
     }
 
@@ -92,29 +107,5 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
         }
 
         return empty(array_diff_assoc($this->elements, $collection->toArray()));
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->elements;
-    }
-
-    /**
-     * @return \Iterator
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->elements);
-    }
-
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->elements);
     }
 }

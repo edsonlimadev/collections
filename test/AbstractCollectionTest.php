@@ -101,6 +101,16 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($filtered->equals(new Immutable([1 => 'a', 3 => 'b'])));
     }
 
+    /**
+     * @expectedException \Edsonlimadev\Collections\Exception\InvalidFilterException
+     */
+    public function testFilterWithAnInvalidClosure()
+    {
+        $collection = new Immutable(['Alcatrazz', 'Rainbow']);
+
+        $collection->filter(function($a, $b, $c) {});
+    }
+
     public function testMapWithoutIndex()
     {
         $collection = new Immutable([

@@ -64,10 +64,16 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
 
     /**
      * @param callable $filter
+     * @throws Exception\InvalidClosureException
      * @return AbstractCollection
      */
     public function filter(callable $filter)
     {
+        $nArgs = (new \ReflectionFunction($filter))->getNumberOfParameters();
+        if ($nArgs > 2) {
+            throw new Exception\InvalidFilterException('A "filter function" only has two parameters!');
+        }
+
         $filtered = [];
 
         foreach ($this->elements as $index => $element) {

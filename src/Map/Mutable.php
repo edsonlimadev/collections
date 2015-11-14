@@ -8,7 +8,7 @@ use Edsonlimadev\Collections;
  * Class Mutable
  * @package Edsonlimadev\Collections\Map
  */
-class Mutable extends Base
+class Mutable extends Base implements Interfaces\Mutable
 {
     /**
      * @param $key
@@ -17,5 +17,13 @@ class Mutable extends Base
     public function set($key, $value)
     {
         $this->elements[$key] = $value;
+    }
+
+    /**
+     * @param $key
+     */
+    public function remove($key)
+    {
+        unset($this->elements[$key]);
     }
 }

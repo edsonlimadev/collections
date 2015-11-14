@@ -2,6 +2,8 @@
 
 namespace Edsonlimadev\Collections;
 
+use Edsonlimadev\Collections\Interfaces\Collection;
+use Edsonlimadev\Collections\Interfaces\Comparable;
 use Edsonlimadev\Collections\Traits\CollectionBasicOperations as BasicOperations;
 use Edsonlimadev\Collections\Traits\CollectionFunctionalOperations as FunctionalOperations;
 

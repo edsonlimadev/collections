@@ -5,12 +5,13 @@ namespace Edsonlimadev\Collections\Map;
 use Edsonlimadev\Collections\AbstractCollection;
 use Edsonlimadev\Collections\Exception\KeyNotFoundException;
 use Edsonlimadev\Collections\Immutable as ImmutableCollection;
+use Edsonlimadev\Collections\Interfaces\OptionalAggregate;
 
 /**
  * Class Map
  * @package Edsonlimadev\Collections
  */
-abstract class Base extends AbstractCollection
+abstract class Base extends AbstractCollection implements Interfaces\Map, OptionalAggregate
 {
     /**
      * @return AbstractCollection
@@ -42,6 +43,11 @@ abstract class Base extends AbstractCollection
         return $this->elements[$key];
     }
 
+    /**
+     * @param $key
+     * @param $default
+     * @return mixed
+     */
     public function getValue($key, $default)
     {
         if (!empty($this->elements[$key])) {
@@ -49,5 +55,14 @@ abstract class Base extends AbstractCollection
         }
 
         return $default;
+    }
+
+    /**
+     * @param $key
+     * @return boolean
+     */
+    public function has($key)
+    {
+        return isset($this->elements[$key]);
     }
 }

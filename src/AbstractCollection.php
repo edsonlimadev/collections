@@ -78,13 +78,14 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function map(\Closure $mapper)
     {
-        $mapped = [];
+        $keys = array_keys($this->elements);
 
-        foreach ($this->elements as $index => $element) {
-            $mapped[$index] = $mapper($element, $index);
-        }
-
-        return new static($mapped);
+        return new static(
+            array_combine(
+                $keys,
+                array_map($mapper, array_values($this->elements), $keys)
+            )
+        );
     }
 
     /**

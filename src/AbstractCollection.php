@@ -51,9 +51,12 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function each(callable $block)
     {
-        $this->checkNumberOfParameters($block, new Exception\InvalidClosureException('An "each block" only has two parameters!'));
+        $this->checkNumberOfParameters(
+            $block,
+            new Exception\InvalidClosureException('An "each block" only has two parameters!')
+        );
 
-        array_walk($this->elements, function($element, $index) use ($block) {
+        array_walk($this->elements, function ($element, $index) use ($block) {
             call_user_func($block, $element, $index);
         });
     }
@@ -65,7 +68,10 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function filter(callable $filter)
     {
-        $this->checkNumberOfParameters($filter, new Exception\InvalidFilterException('A "filter function" only has two parameters!'));
+        $this->checkNumberOfParameters(
+            $filter,
+            new Exception\InvalidFilterException('A "filter function" only has two parameters!')
+        );
 
         $filtered = [];
 
@@ -85,7 +91,10 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function map(callable $map)
     {
-        $this->checkNumberOfParameters($map, new Exception\InvalidMapException('A "filter function" only has two parameters!'));
+        $this->checkNumberOfParameters(
+            $map,
+            new Exception\InvalidMapException('A "filter function" only has two parameters!')
+        );
         $keys = array_keys($this->elements);
 
         return new static(
@@ -104,7 +113,10 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function reduce(callable $reducer, $initialValue = null)
     {
-        $this->checkNumberOfParameters($reducer, new Exception\InvalidReduceException('A "reduce function" only has two parameters!'));
+        $this->checkNumberOfParameters(
+            $reducer,
+            new Exception\InvalidReduceException('A "reduce function" only has two parameters!')
+        );
 
         return array_reduce($this->elements, $reducer, $initialValue);
     }
@@ -142,16 +154,19 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function sort(callable $sort)
     {
-        $this->checkNumberOfParameters($sort, new Exception\InvalidSortException('A "sort function" only has two parameters!'));
+        $this->checkNumberOfParameters(
+            $sort,
+            new Exception\InvalidSortException('A "sort function" only has two parameters!')
+        );
 
         $copy = array_merge($this->elements);
         usort($copy, $sort);
         return new static($copy);
     }
 
-    protected function checkNumberOfParameters(callable $c, Exception\InvalidClosureException $exception)
+    protected function checkNumberOfParameters(callable $closure, Exception\InvalidClosureException $exception)
     {
-        $nArgs = (new \ReflectionFunction($c))->getNumberOfParameters();
+        $nArgs = (new \ReflectionFunction($closure))->getNumberOfParameters();
         if ($nArgs > 2) {
             throw $exception;
         }

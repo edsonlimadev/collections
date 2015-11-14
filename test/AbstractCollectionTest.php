@@ -148,6 +148,16 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException \Edsonlimadev\Collections\Exception\InvalidMapException
+     */
+    public function testMapWithAnInvalidClosure()
+    {
+        $collection = new Immutable(['Deep Purple']);
+
+        $collection->map(function($a, $b, $c) {});
+    }
+
     public function testReduceWithoutInitialValue()
     {
         $collection = new Immutable(['Edson','Lima', 'Junior']);

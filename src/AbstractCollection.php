@@ -86,17 +86,23 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * @param callable $mapper
+     * @param callable $map
+     * @throws Exception\InvalidMapException
      * @return AbstractCollection
      */
-    public function map(callable $mapper)
+    public function map(callable $map)
     {
+        $nArgs = (new \ReflectionFunction($map))->getNumberOfParameters();
+        if ($nArgs > 2) {
+            throw new Exception\InvalidMapException('A "filter function" only has two parameters!');
+        }
+
         $keys = array_keys($this->elements);
 
         return new static(
             array_combine(
                 $keys,
-                array_map($mapper, array_values($this->elements), $keys)
+                array_map($map, array_values($this->elements), $keys)
             )
         );
     }

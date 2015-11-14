@@ -9,14 +9,14 @@ namespace Edsonlimadev\Collections;
 interface Comparable
 {
     /**
-     * @param mixed $some
+     * @param mixed $something
      * @return boolean
      */
-    public function equals($some);
+    public function equals($something);
 
     /**
-     * @param mixed $some
+     * @param mixed $something
      * @return boolean
      */
-    public function different($some);
+    public function different($something);
 }

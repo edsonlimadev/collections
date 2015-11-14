@@ -3,9 +3,27 @@
 namespace Edsonlimadev\Collections\Traits;
 
 use Edsonlimadev\Collections\Exception;
+use Edsonlimadev\Collections\Immutable;
 
 trait CollectionFunctionalOperations
 {
+    /**
+     * @param callable $closure
+     * @param Exception\InvalidClosureException $exception
+     * @param integer $expected
+     */
+    protected function checkNumberOfParameters(
+        callable $closure,
+        Exception\InvalidClosureException $exception,
+        $expected = 2
+    ) {
+        $nArgs = (new \ReflectionFunction($closure))->getNumberOfParameters();
+
+        if ($nArgs > $expected) {
+            throw $exception;
+        }
+    }
+
     /**
      * @param callable $block
      * @throws Exception\InvalidClosureException
@@ -97,30 +115,5 @@ trait CollectionFunctionalOperations
         $copy = array_merge($this->elements);
         usort($copy, $sort);
         return new static($copy);
-    }
-
-    public function split(callable $sort)
-    {
-        $this->checkNumberOfParameters(
-            $sort,
-            new Exception\InvalidSortException('A "sort function" only has two parameters!')
-        );
-    }
-
-    /**
-     * @param callable $closure
-     * @param Exception\InvalidClosureException $exception
-     * @param integer $expected
-     */
-    protected function checkNumberOfParameters(
-        callable $closure,
-        Exception\InvalidClosureException $exception,
-        $expected = 2
-    ) {
-        $nArgs = (new \ReflectionFunction($closure))->getNumberOfParameters();
-
-        if ($nArgs > $expected) {
-            throw $exception;
-        }
     }
 }

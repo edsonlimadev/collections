@@ -63,6 +63,21 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($collectionA->equals($collectionB));
     }
 
+    public function testCheckDifferentMethodWithASimilarCollection()
+    {
+        $collectionA = new Immutable(['a']);
+        $collectionB = new Immutable(['a']);
+
+        $this->assertFalse($collectionA->different($collectionB));
+    }
+
+    public function testCheckDifferentMethodWithADifferentValue()
+    {
+        $collectionA = new Immutable(['a']);
+
+        $this->assertTrue($collectionA->different('a'));
+    }
+
     public function testEachWithoutIndex()
     {
         $sum = 0;

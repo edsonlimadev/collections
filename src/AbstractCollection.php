@@ -44,11 +44,11 @@ abstract class AbstractCollection implements Collection, Comparable
     }
 
     /**
-     * @param $to
+     * @param $some
      * @return bool
      */
-    public function different($to)
+    public function different($some)
     {
-        return !$this->equals($to);
+        return !$this->equals($some);
     }
 }

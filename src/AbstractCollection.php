@@ -47,9 +47,16 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
 
     /**
      * @param callable $block
+     * @throws Exception\InvalidClosureException
+     * @throwsMessage
      */
     public function each(callable $block)
     {
+        $nArgs = (new \ReflectionFunction($block))->getNumberOfParameters();
+        if ($nArgs > 2) {
+            throw new Exception\InvalidClosureException('An "each block" only has two parameters!');
+        }
+
         array_walk($this->elements, function($element, $index) use ($block) {
             call_user_func($block, $element, $index);
         });

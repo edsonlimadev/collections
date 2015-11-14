@@ -67,6 +67,16 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         ], $mapped);
     }
 
+    /**
+     * @expectedException \Edsonlimadev\Collections\Exception\InvalidClosureException
+     */
+    public function testEachWithAnInvalidClosure()
+    {
+        $collection = new Immutable(['Genesis', 'Yes']);
+
+        $collection->each(function($a, $b, $c, $d, $e) {});
+    }
+
     public function testFilterWithoutIndex()
     {
         $collection = new Immutable([1,'a',3]);

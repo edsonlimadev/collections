@@ -1,20 +1,12 @@
-diff --git a/.codeclimate.yml b/.codeclimate.yml
-index e69de29..451032a 100644
---- a/.codeclimate.yml
-+++ b/.codeclimate.yml
-@@ -0,0 +1,15 @@
-+---
-+engines:
-+  fixme:
-+    enabled: true
-+  phpcodesniffer:
-+    enabled: true
-+  phpmd:
-+    enabled: true
-+ratings:
-+  paths:
-+  - "**.php"
-+  - "**.module"
-+  - "**.inc"
-+exclude_paths:
-+- test/**/*
+engines:
+  fixme:
+    enabled: true
+  phpcodesniffer:
+    enabled: true
+  phpmd:
+    enabled: true
+ratings:
+  paths:
+  - "**.php"
+  - "**.module"
+  - "**.inc"

@@ -39,6 +39,32 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([42, new \stdClass()], $collection->toArray());
     }
 
+
+
+    public function testEqualsWithASimilarCollection()
+    {
+        $collectionA = new Immutable([42,'vamos mostrar cultura']);
+        $collectionB = clone $collectionA;
+
+        $this->assertTrue($collectionA->equals($collectionB));
+    }
+
+    public function testEqualsWithADifferentCollection()
+    {
+        $collectionA = new Immutable([42,'top nos falsetes']);
+        $collectionB = new Immutable([1 => 42, 'a' =>'top nos falsetes']);
+
+        $this->assertFalse($collectionA->equals($collectionB));
+    }
+
+    public function testEqualsWithACollectionWithSameValuesButDifferentIndexes()
+    {
+        $collectionA = new Immutable([42,'top nos falsetes, viu!!!']);
+        $collectionB = new Immutable([1 => 42, 'a' =>'top nos falsetes, viu!!!']);
+
+        $this->assertFalse($collectionA->equals($collectionB));
+    }
+
     public function testEachWithoutIndex()
     {
         $sum = 0;
@@ -186,31 +212,7 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $collection->reduce(function($a, $b, $c) {});
     }
 
-    public function testEqualsWithASimilarCollection()
-    {
-        $collectionA = new Immutable([42,'vamos mostrar cultura']);
-        $collectionB = clone $collectionA;
-
-        $this->assertTrue($collectionA->equals($collectionB));
-    }
-
-    public function testEqualsWithADifferentCollection()
-    {
-        $collectionA = new Immutable([42,'top nos falsetes']);
-        $collectionB = new Immutable([1 => 42, 'a' =>'top nos falsetes']);
-
-        $this->assertFalse($collectionA->equals($collectionB));
-    }
-
-    public function testEqualsWithACollectionWithSameValuesButDifferentIndexes()
-    {
-        $collectionA = new Immutable([42,'top nos falsetes, viu!!!']);
-        $collectionB = new Immutable([1 => 42, 'a' =>'top nos falsetes, viu!!!']);
-
-        $this->assertFalse($collectionA->equals($collectionB));
-    }
-
-    public function testSort()
+    public function testSortWithAValidClosure()
     {
         $collectionA = new Immutable([1,3,2]);
         $expected = new Immutable([1,2,3]);
@@ -220,5 +222,15 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         });
 
         $this->assertTrue($sortedCollection->equals($expected));
+    }
+
+    /**
+     * @expectedException \Edsonlimadev\Collections\Exception\InvalidSortException
+     */
+    public function testSortWithAnInvalidClosure()
+    {
+        $collection = new Immutable();
+
+        $collection->sort(function($a, $b, $c) {});
     }
 }

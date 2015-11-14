@@ -136,13 +136,16 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * @param callable $sortManager
+     * @param callable $sort
+     * @throws Exception\InvalidSortException
      * @return static
      */
-    public function sort(callable $sortManager)
+    public function sort(callable $sort)
     {
+        $this->checkNumberOfParameters($sort, new Exception\InvalidSortException('A "sort function" only has two parameters!'));
+
         $copy = array_merge($this->elements);
-        usort($copy, $sortManager);
+        usort($copy, $sort);
         return new static($copy);
     }
 

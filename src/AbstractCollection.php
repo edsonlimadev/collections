@@ -9,7 +9,7 @@ use Edsonlimadev\Collections\Traits\CollectionFunctionalOperations as Functional
  * Class AbstractCollection
  * @package Edsonlimadev\Collections
  */
-abstract class AbstractCollection implements Collection
+abstract class AbstractCollection implements Collection, Comparable
 {
     use BasicOperations;
     use FunctionalOperations;
@@ -23,19 +23,32 @@ abstract class AbstractCollection implements Collection
     }
 
     /**
-     * @param Collection $collection
+     * @param $to
      * @return bool
      */
-    public function equals(Collection $collection)
+    public function equals($to)
     {
-        if (get_class($this) != get_class($collection)) {
+        if (!$to instanceof Collection) {
             return false;
         }
 
-        if (count($this) !== count($collection)) {
+        if (get_class($this) != get_class($to)) {
             return false;
         }
 
-        return empty(array_diff_assoc($this->elements, $collection->toArray()));
+        if (count($this) !== count($to)) {
+            return false;
+        }
+
+        return empty(array_diff_assoc($this->elements, $to->toArray()));
+    }
+
+    /**
+     * @param $to
+     * @return bool
+     */
+    public function different($to)
+    {
+        return !$this->equals($to);
     }
 }

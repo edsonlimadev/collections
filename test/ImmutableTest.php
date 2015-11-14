@@ -4,7 +4,7 @@ namespace Edsonlimadev\Collections;
 
 class ImmutableTest extends \PHPUnit_Framework_TestCase
 {
-    public function testIfImmutableIsACollectionInstance()
+    public function testVerifyIfImmutableIsACollectionInstance()
     {
         $this->assertInstanceOf('Edsonlimadev\\Collections\\AbstractCollection', new Immutable());
     }

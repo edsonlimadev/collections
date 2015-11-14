@@ -25,7 +25,7 @@ trait CollectionFunctionalOperations
     /**
      * @param callable $filter
      * @throws Exception\InvalidFilterException
-     * @return Collection
+     * @return \Edsonlimadev\Collections\Collection
      */
     public function filter(callable $filter)
     {
@@ -99,14 +99,27 @@ trait CollectionFunctionalOperations
         return new static($copy);
     }
 
+    public function split(callable $sort)
+    {
+        $this->checkNumberOfParameters(
+            $sort,
+            new Exception\InvalidSortException('A "sort function" only has two parameters!')
+        );
+    }
+
     /**
      * @param callable $closure
      * @param Exception\InvalidClosureException $exception
+     * @param integer $expected
      */
-    protected function checkNumberOfParameters(callable $closure, Exception\InvalidClosureException $exception)
-    {
+    protected function checkNumberOfParameters(
+        callable $closure,
+        Exception\InvalidClosureException $exception,
+        $expected = 2
+    ) {
         $nArgs = (new \ReflectionFunction($closure))->getNumberOfParameters();
-        if ($nArgs > 2) {
+
+        if ($nArgs > $expected) {
             throw $exception;
         }
     }

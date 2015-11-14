@@ -44,12 +44,6 @@ interface Collection extends \IteratorAggregate, \Countable
     public function contains($element);
 
     /**
-     * @param Collection $collection
-     * @return bool
-     */
-    public function equals(Collection $collection);
-
-    /**
      * @param callable $sort
      * @throws Exception\InvalidSortException
      * @return static

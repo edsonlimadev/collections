@@ -4,7 +4,7 @@ namespace Edsonlimadev\Collections;
 
 class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetIterator()
+    public function testVerifyGetIteratorMethod()
     {
         $collection = new Immutable([1,3]);
         $iterator = $collection->getIterator();
@@ -18,28 +18,26 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([1,3], $values);
     }
 
-    public function testCount()
+    public function testVerifyCountMethod()
     {
         $collection = new Immutable([1,3]);
 
         $this->assertCount(2, $collection);
     }
 
-    public function testContains()
+    public function testVerifyContainsMethod()
     {
         $collection = new Immutable(range(40,42));
 
         $this->assertTrue($collection->contains(42));
     }
 
-    public function testToArray()
+    public function testVerifyToArrayMethod()
     {
         $collection = new Immutable([42, new \stdClass()]);
 
         $this->assertEquals([42, new \stdClass()], $collection->toArray());
     }
-
-
 
     public function testEqualsWithASimilarCollection()
     {

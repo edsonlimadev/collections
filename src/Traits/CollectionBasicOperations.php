@@ -11,7 +11,7 @@ use Edsonlimadev\Collections\Exception;
 trait CollectionBasicOperations
 {
     /**
-     * @var
+     * @var array $elements
      */
     protected $elements;
 

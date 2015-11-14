@@ -4,7 +4,7 @@ namespace Edsonlimadev\Collections\Map;
 
 class MutableTest extends \PHPUnit_Framework_TestCase
 {
-    public function testIfMutableIsAMapInstance()
+    public function testVerifyIfMutableIsAMapInstance()
     {
         $this->assertInstanceOf('Edsonlimadev\\Collections\\Map\\Base', new Mutable());
     }

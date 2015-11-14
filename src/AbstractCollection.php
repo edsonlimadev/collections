@@ -48,7 +48,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
     /**
      * @param callable $block
      */
-    public function each(\Closure $block)
+    public function each(callable $block)
     {
         array_walk($this->elements, function($element, $index) use ($block) {
             call_user_func($block, $element, $index);
@@ -59,7 +59,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      * @param callable $filter
      * @return AbstractCollection
      */
-    public function filter(\Closure $filter)
+    public function filter(callable $filter)
     {
         $filtered = [];
 
@@ -76,7 +76,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      * @param callable $mapper
      * @return AbstractCollection
      */
-    public function map(\Closure $mapper)
+    public function map(callable $mapper)
     {
         $keys = array_keys($this->elements);
 
@@ -93,7 +93,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      * @param null $initialValue
      * @return mixed
      */
-    public function reduce(\Closure $reducer, $initialValue = null)
+    public function reduce(callable $reducer, $initialValue = null)
     {
         return array_reduce($this->elements, $reducer, $initialValue);
     }
@@ -128,7 +128,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      * @param callable $sortManager
      * @return static
      */
-    public function sort(\Closure $sortManager)
+    public function sort(callable $sortManager)
     {
         $copy = array_merge($this->elements);
         usort($copy, $sortManager);

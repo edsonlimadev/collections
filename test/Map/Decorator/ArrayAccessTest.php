@@ -3,15 +3,15 @@
 namespace Edsonlimadev\Collections;
 
 use Edsonlimadev\Collections\Map;
-use Edsonlimadev\Collections\Map\Decorator\ArrayAccessable;
+use Edsonlimadev\Collections\Map\Decorator\ArrayAccess;
 
-class ArrayAccessableTest extends \PHPUnit_Framework_TestCase
+class ArrayAccessTest extends \PHPUnit_Framework_TestCase
 {
     public function testVerirfyIfArrayAccessableIsAMap()
     {
         $this->assertInstanceOf(
             'Edsonlimadev\\Collections\\Map\\Interfaces\\Map',
-            new ArrayAccessable(new Map\Mutable())
+            new ArrayAccess(new Map\Mutable())
         );
     }
 
@@ -22,7 +22,7 @@ class ArrayAccessableTest extends \PHPUnit_Framework_TestCase
             'gokufamily.sj2' => 'Gohan',
             'gokufamily.sj3' => 'Pan'
         ]);
-        $map = new ArrayAccessable($mutableMap);
+        $map = new ArrayAccess($mutableMap);
         $map['vegetafamily.sj1'] = 'Vegeta';
         $map['vegetafamily.sj2'] = 'Trunks';
 
@@ -36,7 +36,7 @@ class ArrayAccessableTest extends \PHPUnit_Framework_TestCase
     public function testSetAValueInAnImutableMap()
     {
         $imutableMap = new Map\Immutable([1,2,3,4]);
-        $map = new ArrayAccessable($imutableMap);
+        $map = new ArrayAccess($imutableMap);
 
         $map[] = 6;
     }
@@ -47,7 +47,7 @@ class ArrayAccessableTest extends \PHPUnit_Framework_TestCase
             'hero'    => 'Ryu',
             'villain' => 'Fou lu'
         ]);
-        $map = new ArrayAccessable($mutableMap);
+        $map = new ArrayAccess($mutableMap);
         unset($map['villain']);
 
         $this->assertAttributeEquals(['hero' => 'Ryu'], 'elements', $mutableMap);
@@ -59,7 +59,7 @@ class ArrayAccessableTest extends \PHPUnit_Framework_TestCase
             'vocals' => 'Peter Gabriel',
             'drums'  => ''
         ]);
-        $map = new ArrayAccessable($imutableMap);
+        $map = new ArrayAccess($imutableMap);
 
         $this->assertTrue(isset($map['vocals']));
         $this->assertFalse(isset($map['bass']));
@@ -72,7 +72,7 @@ class ArrayAccessableTest extends \PHPUnit_Framework_TestCase
             'vocals'  => 'Ozzy Osbourne',
             'guitars' => 'Randy Rhoads'
         ]);
-        $map = new ArrayAccessable($imutableMap);
+        $map = new ArrayAccess($imutableMap);
 
         $this->assertEquals('Randy Rhoads', $map['guitars']);
     }
@@ -86,7 +86,7 @@ class ArrayAccessableTest extends \PHPUnit_Framework_TestCase
             'vocals'  => 'Dio',
             'guitars' => 'Tonny Iommi'
         ]);
-        $map = new ArrayAccessable($imutableMap);
+        $map = new ArrayAccess($imutableMap);
 
         $map['bass'];
     }

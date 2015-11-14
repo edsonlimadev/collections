@@ -7,10 +7,10 @@ use Edsonlimadev\Collections\Map\Base as Map;
 use Edsonlimadev\Collections\Map\Interfaces;
 
 /**
- * Class ArrayAccessable
+ * Class ArrayAccess
  * @package Edsonlimadev\Collections\Map\Decorator
  */
-class ArrayAccessable extends Map implements \ArrayAccess
+class ArrayAccess extends Map implements \ArrayAccess
 {
     /**
      * @var Map

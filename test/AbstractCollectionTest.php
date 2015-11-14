@@ -176,6 +176,16 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         }, 1));
     }
 
+    /**
+     * @expectedException \Edsonlimadev\Collections\Exception\InvalidReduceException
+     */
+    public function testReduceWithAnInvalidClosure()
+    {
+        $collection = new Immutable(['Deep Purple']);
+
+        $collection->reduce(function($a, $b, $c) {});
+    }
+
     public function testEqualsWithASimilarCollection()
     {
         $collectionA = new Immutable([42,'vamos mostrar cultura']);

@@ -50,9 +50,9 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
      */
     public function each(\Closure $block)
     {
-        foreach ($this->elements as $index => $element) {
-            $block($element, $index);
-        }
+        array_walk($this->elements, function($element, $index) use ($block) {
+            call_user_func($block, $element, $index);
+        });
     }
 
     /**
@@ -64,7 +64,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable
         $filtered = [];
 
         foreach ($this->elements as $index => $element) {
-            if ($filter($element, $index)) {
+            if (call_user_func($filter, $element, $index)) {
                 $filtered[$index] = $element;
             }
         }

@@ -3,7 +3,6 @@
 namespace Edsonlimadev\Collections\Traits;
 
 use Edsonlimadev\Collections\Exception;
-use Edsonlimadev\Collections\Immutable;
 
 trait CollectionFunctionalOperations
 {
@@ -66,7 +65,7 @@ trait CollectionFunctionalOperations
     /**
      * @param callable $map
      * @throws Exception\InvalidMapException
-     * @return Collection
+     * @return \Edsonlimadev\Collections\Collection
      */
     public function map(callable $map)
     {

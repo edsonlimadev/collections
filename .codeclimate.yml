@@ -1,6 +1,4 @@
 engines:
-  fixme:
-    enabled: true
   phpcodesniffer:
     enabled: true
   phpmd:
@@ -11,4 +9,4 @@ ratings:
   - "**.module"
   - "**.inc"
 exclude_paths:
-  test/**/*
+  - test/**/*

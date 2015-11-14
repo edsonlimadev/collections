@@ -23,24 +23,24 @@ abstract class AbstractCollection implements Collection, Comparable
     }
 
     /**
-     * @param $to
+     * @param $some
      * @return bool
      */
-    public function equals($to)
+    public function equals($some)
     {
-        if (!$to instanceof Collection) {
+        if (!$some instanceof Collection) {
             return false;
         }
 
-        if (get_class($this) != get_class($to)) {
+        if (get_class($this) != get_class($some)) {
             return false;
         }
 
-        if (count($this) !== count($to)) {
+        if (count($this) !== count($some)) {
             return false;
         }
 
-        return empty(array_diff_assoc($this->elements, $to->toArray()));
+        return empty(array_diff_assoc($this->elements, $some->toArray()));
     }
 
     /**

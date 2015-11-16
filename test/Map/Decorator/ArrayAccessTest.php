@@ -7,7 +7,7 @@ use Edsonlimadev\Collections\Map\Decorator\ArrayAccess;
 
 class ArrayAccessTest extends \PHPUnit_Framework_TestCase
 {
-    public function testVerirfyIfArrayAccessableIsAMap()
+    public function testVerifyIfArrayAccessIsAMap()
     {
         $this->assertInstanceOf(
             'Edsonlimadev\\Collections\\Map\\Interfaces\\Map',

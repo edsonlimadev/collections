@@ -11,7 +11,7 @@
          bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Collection Test Suite">
-            <directory>./src/</directory>
+            <directory>./test/</directory>
         </testsuite>
     </testsuites>
 

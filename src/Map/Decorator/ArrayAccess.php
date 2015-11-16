@@ -2,26 +2,19 @@
 
 namespace Edsonlimadev\Collections\Map\Decorator;
 
+use Edsonlimadev\Collections\AbstractDecorator;
 use Edsonlimadev\Collections\Exception\KeyNotFoundException;
 use Edsonlimadev\Collections\Map\Decorator\Traits\MapBasicOperations;
 use Edsonlimadev\Collections\Map\Interfaces;
-use Edsonlimadev\Collections\Traits\Decorator\CollectionBasicOperations;
-use Edsonlimadev\Collections\Traits\Decorator\CollectionFunctionalOperations;
+
 
 /**
  * Class ArrayAccess
  * @package Edsonlimadev\Collections\Map\Decorator
  */
-class ArrayAccess implements \ArrayAccess, Interfaces\Map
+class ArrayAccess extends AbstractDecorator implements \ArrayAccess, Interfaces\Map
 {
-    use CollectionBasicOperations;
-    use CollectionFunctionalOperations;
     use MapBasicOperations;
-
-    /**
-     * @var Interfaces\Map
-     */
-    private $decorated;
 
     /**
      * @param Interfaces\Map $map

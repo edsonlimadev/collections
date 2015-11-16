@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
          colors="true"
@@ -12,13 +11,13 @@
          bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Collection Test Suite">
-            <directory>./test/</directory>
+            <directory>./src/</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-	    <directory>./test/</directory>
+	        <directory>./src/</directory>
         </whitelist>
     </filter>
 </phpunit>

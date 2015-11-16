@@ -63,6 +63,36 @@ class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($collectionA->equals($collectionB));
     }
 
+    public function testEqualsWithADifferentClass()
+    {
+        $collectionA = new Immutable([42, 'Família do Zaralho']);
+
+        $this->assertFalse($collectionA->equals(new \DateTime()));
+    }
+
+    public function testEqualsWithADifferentTypeOfCollection()
+    {
+        $collectionA = new Immutable([42, 'Família do Zaralho']);
+        $collectionB = new Map\Immutable([42, 'Família do Zaralho']);
+
+        $this->assertFalse($collectionA->equals($collectionB));
+    }
+
+    public function testEqualsWithAString()
+    {
+        $collectionA = new Immutable([42, 'Family Guy']);
+
+        $this->assertFalse($collectionA->equals('South Park'));
+    }
+
+    public function testEqualsWithACollectionWithDifferentNumberOfElements()
+    {
+        $collectionA = new Immutable([42, 'Family Guy']);
+        $collectionB = new Immutable([42, 'Family Guy', 'Cleveland Show']);
+
+        $this->assertFalse($collectionA->equals($collectionB));
+    }
+
     public function testCheckDifferentMethodWithASimilarCollection()
     {
         $collectionA = new Immutable(['a']);

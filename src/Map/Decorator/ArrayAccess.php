@@ -2,25 +2,30 @@
 
 namespace Edsonlimadev\Collections\Map\Decorator;
 
+use Edsonlimadev\Collections\AbstractCollection;
 use Edsonlimadev\Collections\Exception\KeyNotFoundException;
-use Edsonlimadev\Collections\Map\Base as Map;
 use Edsonlimadev\Collections\Map\Interfaces;
+use Edsonlimadev\Collections\Traits\CollectionBasicOperations;
+use Edsonlimadev\Collections\Traits\CollectionFunctionalOperations;
 
 /**
  * Class ArrayAccess
  * @package Edsonlimadev\Collections\Map\Decorator
  */
-class ArrayAccess extends Map implements \ArrayAccess
+class ArrayAccess extends AbstractCollection implements \ArrayAccess, Interfaces\Map
 {
+    use CollectionBasicOperations;
+    use CollectionFunctionalOperations;
+
     /**
-     * @var Map
+     * @var Interfaces\Map
      */
     private $map;
 
     /**
-     * @param Map $map
+     * @param Interfaces\Map $map
      */
-    public function __construct(Map $map)
+    public function __construct(Interfaces\Map $map)
     {
         $this->map = $map;
     }
@@ -76,11 +81,11 @@ class ArrayAccess extends Map implements \ArrayAccess
     }
 
     /**
-     * @param Map $map
+     * @param Interfaces\Map $map
      * @param \Exception $exception
      * @throws \Exception
      */
-    protected function checkIfIsMutable(Map $map, \Exception $exception)
+    protected function checkIfIsMutable(Interfaces\Map $map, \Exception $exception)
     {
         if ($map instanceof Interfaces\Immutable) {
             throw $exception;
@@ -88,11 +93,38 @@ class ArrayAccess extends Map implements \ArrayAccess
     }
 
     /**
+     * @return mixed
+     */
+    public function keys()
+    {
+        return $this->map->keys();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function values()
+    {
+        return $this->map->values();
+    }
+
+    /**
+     * @param $key
+     * @throws \Edsonlimadev\Collections\Exception\KeyNotFoundException
+     * @return mixed
+     */
+    public function get($key)
+    {
+        return $this->map->get($key);
+    }
+
+    /**
      * @param $method
      * @param $params
+     * @return mixed
      */
     public function __call($method, $params)
     {
-        call_user_func_array([$this->map, $method], $params);
+        return call_user_func_array([$this->map, $method], $params);
     }
 }

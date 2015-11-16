@@ -90,4 +90,33 @@ class ArrayAccessTest extends \PHPUnit_Framework_TestCase
 
         $map['bass'];
     }
+
+    public function testKeysMethodInAMap()
+    {
+        $map = new ArrayAccess(new Map\Immutable([
+            'Kickapoo' => 'Tenacious D'
+        ]));
+
+        $this->assertEquals(['Kickapoo'], $map->keys()->toArray());
+    }
+
+    public function testValuesMethodInAMap()
+    {
+        $map = new ArrayAccess(new Map\Immutable([
+            'Master Exploder' => 'Tenacious D'
+        ]));
+
+        $this->assertEquals(['Tenacious D'], $map->values()->toArray());
+    }
+
+    public function testCheckIfMethodsOfTheDecoratedAreInvoked()
+    {
+        $map = new ArrayAccess(new Map\Mutable([
+            'Samurai Jack' => 'Abu'
+        ]));
+
+        $map->set('Static Shock', 'Ebon');
+
+        $this->assertEquals('Ebon', $map->get('Static Shock'));
+    }
 }

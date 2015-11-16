@@ -2,7 +2,7 @@
 
 namespace Edsonlimadev\Collections;
 
-class Immutable extends AbstractCollection
+class Immutable extends Collection
 {
 
 }

@@ -2,17 +2,16 @@
 
 namespace Edsonlimadev\Collections;
 
-use Edsonlimadev\Collections\Interfaces\Collection;
-use Edsonlimadev\Collections\Interfaces\Comparable;
+use Edsonlimadev\Collections\Interfaces;
 use Edsonlimadev\Collections\Traits\CollectionBasicOperations as BasicOperations;
 use Edsonlimadev\Collections\Traits\CollectionFunctionalOperations as FunctionalOperations;
 use Edsonlimadev\Collections\Traits\ComparableOperations;
 
 /**
- * Class AbstractCollection
+ * Class Collection
  * @package Edsonlimadev\Collections
  */
-abstract class AbstractCollection implements Collection, Comparable
+abstract class Collection implements Interfaces\Collection, Interfaces\Comparable
 {
     use BasicOperations;
     use FunctionalOperations;

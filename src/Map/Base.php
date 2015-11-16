@@ -2,7 +2,7 @@
 
 namespace Edsonlimadev\Collections\Map;
 
-use Edsonlimadev\Collections\AbstractCollection;
+use Edsonlimadev\Collections\Collection;
 use Edsonlimadev\Collections\Exception\KeyNotFoundException;
 use Edsonlimadev\Collections\Immutable as ImmutableCollection;
 use Edsonlimadev\Collections\Interfaces\OptionalAggregate;
@@ -11,10 +11,10 @@ use Edsonlimadev\Collections\Interfaces\OptionalAggregate;
  * Class Map
  * @package Edsonlimadev\Collections
  */
-abstract class Base extends AbstractCollection implements Interfaces\Map, OptionalAggregate
+abstract class Base extends Collection implements Interfaces\Map, OptionalAggregate
 {
     /**
-     * @return AbstractCollection
+     * @return Collection
      */
     public function keys()
     {
@@ -22,7 +22,7 @@ abstract class Base extends AbstractCollection implements Interfaces\Map, Option
     }
 
     /**
-     * @return AbstractCollection
+     * @return Collection
      */
     public function values()
     {

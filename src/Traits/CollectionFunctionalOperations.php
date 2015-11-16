@@ -84,19 +84,19 @@ trait CollectionFunctionalOperations
     }
 
     /**
-     * @param callable $reducer
+     * @param callable $reduce
      * @param null $initialValue
      * @throws Exception\InvalidReduceException
      * @return mixed
      */
-    public function reduce(callable $reducer, $initialValue = null)
+    public function reduce(callable $reduce, $initialValue = null)
     {
         $this->checkNumberOfParameters(
-            $reducer,
+            $reduce,
             new Exception\InvalidReduceException('A "reduce function" only has two parameters!')
         );
 
-        return array_reduce($this->elements, $reducer, $initialValue);
+        return array_reduce($this->elements, $reduce, $initialValue);
     }
 
     /**

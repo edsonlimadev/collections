@@ -2,32 +2,33 @@
 
 namespace Edsonlimadev\Collections\Map\Decorator;
 
-use Edsonlimadev\Collections\AbstractCollection;
 use Edsonlimadev\Collections\Exception\KeyNotFoundException;
+use Edsonlimadev\Collections\Map\Decorator\Traits\MapBasicOperations;
 use Edsonlimadev\Collections\Map\Interfaces;
-use Edsonlimadev\Collections\Traits\CollectionBasicOperations;
-use Edsonlimadev\Collections\Traits\CollectionFunctionalOperations;
+use Edsonlimadev\Collections\Traits\Decorator\CollectionBasicOperations;
+use Edsonlimadev\Collections\Traits\Decorator\CollectionFunctionalOperations;
 
 /**
  * Class ArrayAccess
  * @package Edsonlimadev\Collections\Map\Decorator
  */
-class ArrayAccess extends AbstractCollection implements \ArrayAccess, Interfaces\Map
+class ArrayAccess implements \ArrayAccess, Interfaces\Map
 {
     use CollectionBasicOperations;
     use CollectionFunctionalOperations;
+    use MapBasicOperations;
 
     /**
      * @var Interfaces\Map
      */
-    private $map;
+    private $decorated;
 
     /**
      * @param Interfaces\Map $map
      */
     public function __construct(Interfaces\Map $map)
     {
-        $this->map = $map;
+        $this->decorated = $map;
     }
 
     /**
@@ -37,7 +38,7 @@ class ArrayAccess extends AbstractCollection implements \ArrayAccess, Interfaces
     public function offsetExists($offset)
     {
         try {
-            $this->map->get($offset);
+            $this->decorated->get($offset);
         } catch (KeyNotFoundException $exception) {
             return false;
         }
@@ -51,7 +52,7 @@ class ArrayAccess extends AbstractCollection implements \ArrayAccess, Interfaces
      */
     public function offsetGet($offset)
     {
-        return $this->map->get($offset);
+        return $this->decorated->get($offset);
     }
 
     /**
@@ -61,7 +62,7 @@ class ArrayAccess extends AbstractCollection implements \ArrayAccess, Interfaces
      */
     public function offsetSet($offset, $value)
     {
-        $map = $this->map;
+        $map = $this->decorated;
         $this->checkIfIsMutable($map, new \Exception);
         $offset = is_null($offset) ? count($map) : $offset;
 
@@ -74,7 +75,7 @@ class ArrayAccess extends AbstractCollection implements \ArrayAccess, Interfaces
      */
     public function offsetUnset($offset)
     {
-        $map = $this->map;
+        $map = $this->decorated;
         $this->checkIfIsMutable($map, new \Exception);
 
         $map->remove($offset);
@@ -90,41 +91,5 @@ class ArrayAccess extends AbstractCollection implements \ArrayAccess, Interfaces
         if ($map instanceof Interfaces\Immutable) {
             throw $exception;
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function keys()
-    {
-        return $this->map->keys();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function values()
-    {
-        return $this->map->values();
-    }
-
-    /**
-     * @param $key
-     * @throws \Edsonlimadev\Collections\Exception\KeyNotFoundException
-     * @return mixed
-     */
-    public function get($key)
-    {
-        return $this->map->get($key);
-    }
-
-    /**
-     * @param $method
-     * @param $params
-     * @return mixed
-     */
-    public function __call($method, $params)
-    {
-        return call_user_func_array([$this->map, $method], $params);
     }
 }

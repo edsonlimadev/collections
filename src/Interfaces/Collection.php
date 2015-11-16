@@ -1,6 +1,8 @@
 <?php
 
-namespace Edsonlimadev\Collections;
+namespace Edsonlimadev\Collections\Interfaces;
+
+use Edsonlimadev\Collections\Exception;
 
 interface Collection extends \IteratorAggregate, \Countable
 {

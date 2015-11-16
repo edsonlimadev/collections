@@ -61,36 +61,42 @@ class MapTest extends \PHPUnit_Framework_TestCase
         $collection->get('Inspector Gadget');
     }
 
-    public function testGetDefaultValue()
+    public function testGetAExistentValue()
     {
-        $collection = new Map();
-        $now = new \DateTime();
+        $collection = new Map([
+            'rage' => 'Don\'t fear the winter'
+        ]);
 
-        $this->assertEquals($now, $collection->getValue('Gotta catch\'em all', $now));
-        $this->assertEquals($now, $collection->getValue('Chala head chala', $now));
+        $this->assertEquals('Don\'t fear the winter', $collection->getValue('rage', ''));
     }
 
-//    public function testSetAValueToCollection()
-//    {
-//        $collection = new Immutable();
-//
-//        $collection->set('Shurato', 'Anime');
-//
-//        $this->assertEquals('Anime', $collection->get('Shurato'));
-//    }
-//
-//    public function testSetMultipleValuesToCollection()
-//    {
-//        $collection = new Immutable();
-//
-//        $collection->set('Shurato', 'Anime');
-//        $collection->set('Sandman', 'HQ');
-//        $collection->set('DBZ', 'Anime');
-//        $collection->set('Pokemon', 'Anime');
-//
-//        $this->assertEquals('Anime', $collection->get('Shurato'));
-//        $this->assertEquals('HQ', $collection->get('Sandman'));
-//        $this->assertEquals('Anime', $collection->get('DBZ'));
-//        $this->assertEquals('Anime', $collection->get('Pokemon'));
-//    }
+    public function testGetDefaultValue()
+    {
+        $collection = new Map([
+            'rage' => 'Don\'t fear the winter'
+        ]);
+
+        $this->assertEquals(
+            'Don\'t fear the reaper',
+            $collection->getValue('Blue oyster cult', 'Don\'t fear the reaper')
+        );
+    }
+
+    public function testCheckHasMethodWithAnExistentKey()
+    {
+        $bandsYears = new Map([
+            'rage' => 1984
+        ]);
+
+        $this->assertTrue($bandsYears->has('rage'));
+    }
+
+    public function testCheckHasMethodWithAnInexistentKey()
+    {
+        $bandsYears = new Map([
+            1984 => ['rage']
+        ]);
+
+        $this->assertFalse($bandsYears->has(1985));
+    }
 }

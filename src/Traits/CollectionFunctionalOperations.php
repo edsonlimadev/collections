@@ -42,7 +42,7 @@ trait CollectionFunctionalOperations
     /**
      * @param callable $filter
      * @throws Exception\InvalidFilterException
-     * @return \Edsonlimadev\Collections\Collection
+     * @return \Edsonlimadev\Collections\Interfaces\Collection
      */
     public function filter(callable $filter)
     {
@@ -65,7 +65,7 @@ trait CollectionFunctionalOperations
     /**
      * @param callable $map
      * @throws Exception\InvalidMapException
-     * @return \Edsonlimadev\Collections\Collection
+     * @return \Edsonlimadev\Collections\Interfaces\Collection
      */
     public function map(callable $map)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Edsonlimadev\Collections;
+namespace Edsonlimadev\Collections\Interfaces;
 
 /**
  * Interface Comparable
